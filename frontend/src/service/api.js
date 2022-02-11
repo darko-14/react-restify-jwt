@@ -1,17 +1,3 @@
-const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InNub29wIiwiZW1haWwiOiJzbm9vb3BAZ21haWwuY29tIiwicGFzcyI6IiQyYiQxMCRFeXUvR2U5OVZrLlFIN1VLWFR1RGF1MHlhTGNoWEYyaW9zMHN0RTNJcUNNRUJlYi9ESFo4ZSIsImlhdCI6MTY0NDQxMjc4NX0.vy8f-lrlXx74Im9Kj5aCLJiM9yhrwSo5UdYEBa-VH3A'
-
-export const getAllUsers = (callback) => {
-
-    fetch('http://localhost:5000/users', {
-
-        headers: {
-            'Authorization': JSON.parse(localStorage.getItem("Token"))
-        }
-
-    })
-    .then(res => res.json())
-    .then(callback)
-}
 
 export const login = (user) => {
     fetch(`http://localhost:5000/login`, {
@@ -35,9 +21,46 @@ export const register = (user) => {
     .then(res => res.json())
 }
 
+export const getContacts = () => {
+    fetch('http://localhost:5000/contacts', {
+        headers: {
+            'Authorization': JSON.parse(localStorage.getItem('Token'))
+        }
+    })
+    .then(res => res.json())
+}
 
+export const createContact = (contact) => {
+    fetch(`http://localhost:5000/contacts`, {
+        method: 'POST',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': JSON.parse(localStorage.getItem('Token'))
+        },
+        body: JSON.stringify(contact)
+    })
+    .then(res => res.json())
+}
 
-const user = {
-    username: 'snoop',
-    password: 'snoop'
+export const updateContact = (contact) => {
+    fetch(`http://localhost:5000/contacts/${contact.id}`, {
+        method: 'PUT',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': JSON.parse(localStorage.getItem('Token'))
+        },
+        body: JSON.stringify(contact)
+    })
+    .then(res => res.json())
+}
+
+export const deleteContact = (id) => {
+    fetch(`http://localhost:5000/contacts/${id}`, {
+        method: 'DELETE',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization': JSON.parse(localStorage.getItem('Token'))
+        }
+    })
+    .then(res => res.json())
 }
