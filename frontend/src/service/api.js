@@ -1,5 +1,5 @@
 
-export const login = (user) => {
+export const login = (user, callback) => {
     fetch(`http://localhost:5000/login`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -7,9 +7,9 @@ export const login = (user) => {
     })
     .then(res => res.json())
     .then(data => {
-        localStorage.setItem("Token", JSON.stringify(data.token));
+        localStorage.setItem("Token", JSON.stringify(data[1]));
+        localStorage.setItem("User", JSON.stringify(data[0]));
     })
-
 }
 
 export const register = (user) => {
@@ -21,15 +21,15 @@ export const register = (user) => {
     .then(res => res.json())
 }
 
-export const getContacts = () => {
+export const getContacts = (callback) => {
     fetch('http://localhost:5000/contacts', {
         headers: {
             'Authorization': JSON.parse(localStorage.getItem('Token'))
         }
     })
     .then(res => res.json())
+    .then(callback)
 }
-
 export const createContact = (contact) => {
     fetch(`http://localhost:5000/contacts`, {
         method: 'POST',

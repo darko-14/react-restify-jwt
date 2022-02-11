@@ -86,7 +86,7 @@ app.post('/login', (req, res) => {
             bcrypt.compare(password, rows[0].password, (err, valid) => {
                 if(valid){
                     const token = jwt.sign(username, 'secret');
-                    res.send(token);
+                    res.send([username, token]);
                 }else{
                     res.send(err)
                 }
@@ -115,7 +115,6 @@ app.post('/register', (req, res) => {
             db.query(`INSERT INTO list_of_contacts.users (username, email, password) 
                 VALUES ('${username}', '${email}', '${pass}')`)
             res.send('User registered.');
-            // res.redirect('/login')
         }
     })
 
