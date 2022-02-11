@@ -1,41 +1,44 @@
-import React, { Component } from 'react'
-import { getAllUsers } from './service/api'
-import { login } from './service/api';
-
+import React, { Component } from 'react';
+import Login from './components/Login';
+import Register from './components/Register';
+import HomePage from './components/HomePage';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { login } from './service/api'
 
 export default class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      users: []
+      user: ''
     }
   }
 
-
-  componentDidMount(){
-   // getAllUsers((data) => this.setState({users: data}))
+  componentDidMount = () => {
+    const user = JSON.parse(localStorage.getItem('User'))
+    if(user){
+      this.setState({ user: user })
+    }
   }
 
-  deleteToken = () => {
-    localStorage.removeItem("Token")
+  logout = () => {
+    localStorage.removeItem('Token');
+    localStorage.removeItem('User');
+    this.setState({user:''})
   }
 
   render() {
     return (
-      <div>App
-        {/* {
-          this.state.users.map((v, i) => {
-            return <li key={i}>{v.username}</li>
-          })
-        } */}
-        <button onClick={this.deleteToken}>fetch</button>
-        <ul>
-       
-
-      </ul>
-
-      </div>
+      <BrowserRouter>
+        <Routes>
+          <Route path='/' element={
+            this.state.user === '' ? <Login /> : <HomePage user={this.state.user}
+                                                           logout={this.logout} />
+          }/> 
+          <Route path='/login' element={<Login />}/> 
+          <Route path='/register' element={<Register />}/> 
+        </Routes>
+      </BrowserRouter>
     )
   }
 }
