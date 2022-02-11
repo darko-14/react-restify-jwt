@@ -36,7 +36,7 @@ app.listen(5000, () => {
 
 
 app.get('/contacts', jwtAuth, (req, res) => {
-    db.query(`SELECT name, phone FROM users JOIN contacts ON users.user_id = contacts.user_id 
+    db.query(`SELECT * FROM users JOIN contacts ON users.user_id = contacts.user_id 
     WHERE users.username = '${req.user}'`, (error, rows) => {
         if(error) console.log(error);
         res.send(rows);
@@ -54,6 +54,24 @@ app.post('/contacts', jwtAuth, (req, res) => {
         })
     })
     
+})
+
+app.put('/contacts/:id', jwtAuth, (req, res) => {
+    db.query(`SELECT * FROM users WHERE username='${req.user}'`, (err, user) => {
+        if(err) return res.send(err);
+        db.query(`UPDATE contacts SET name='${req.body.name}', phone=${req.body.phone} 
+        WHERE contact_id = ${req.params.id} AND user_id=${user[0].user_id}`, (err, rows) => {
+            if(err) return res.send(err);
+            res.send(`Contact updated.`);
+        })
+    })
+})
+
+app.del('/contacts/:id', jwtAuth, (req, res) => {
+    db.query(`DELETE FROM contacts WHERE contact_id = ${req.params.id}`, (err, rows) => {
+        if(err) return res.send(err);
+        res.send(`Contact deleted.`);
+    })
 })
 
 app.post('/login', (req, res) => {
