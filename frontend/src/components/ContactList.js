@@ -12,8 +12,8 @@ class ContactList extends Component {
                     return <div key={index}>
                         <SingleContact 
                             contact={contact}
-                            // onDelete={this.props.onDelete}
-                            // onEdit={this.props.onEdit}
+                            onDelete={this.props.onDelete}
+                            onEdit={this.props.onEdit}
                             index={index} />
                     </div>
                 })

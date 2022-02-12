@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { register } from '../service/api';
+import '../App.css';
 
 class Register extends Component {
 
@@ -22,8 +23,8 @@ class Register extends Component {
     render() {
         return (
         <div>
-            Register
-            <form onSubmit={this.handleSubmit}>
+            <form className='form' onSubmit={this.handleSubmit}>
+                <h3>Register</h3>
                 <input type='text' name='username' value={this.state.username} required
                 onChange={e => this.setState({username: e.target.value})} placeholder='username' /> <br />
                 <input type='email' name='email' value={this.state.email} required

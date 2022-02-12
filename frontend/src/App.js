@@ -10,14 +10,7 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      user: ''
-    }
-  }
-
-  componentDidMount = () => {
-    const user = JSON.parse(localStorage.getItem('User'))
-    if(user){
-      this.setState({ user: user })
+      user: JSON.parse(localStorage.getItem('User')) !== null ? JSON.parse(localStorage.getItem('User')) : ''
     }
   }
 

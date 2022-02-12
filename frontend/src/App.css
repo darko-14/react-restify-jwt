@@ -13,14 +13,14 @@
   border-bottom: 1px solid black;
 }
 .form {
-  width: 300px;
+  text-align: center;
+  width: 280px;
   margin: auto;
-  padding: 15px;
-  background-color: rgb(236, 169, 169);
+  padding-bottom: 15px;
   border: 1px solid black;
 }
 .contacts {
-  margin-top: 20px;
+  margin-top: 30px;
 }
 .contact {
   border: 1px solid black;
