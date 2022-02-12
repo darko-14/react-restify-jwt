@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { login } from '../service/api';
 import '../App.css';
 
 class Login extends Component {
@@ -17,7 +16,7 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        login(this.state)
+        this.props.onLogin(this.state)
         this.setState(this.defaultState)
     }
 

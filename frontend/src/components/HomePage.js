@@ -24,11 +24,12 @@ class HomePage extends Component {
     componentDidMount(){
         getContacts(this.setTheState)
     }
-
+    
     onAddorEdit = (contact) => {
         if(this.state.currentIndex === -1){
+            
             createContact(contact);
-            this.setState({contacts: [...this.state.contacts, contact]})
+            this.setState({ contacts: [...this.state.contacts, contact] })
         }else{
             updateContact(this.state.contacts[this.state.currentIndex].contact_id);
 

@@ -10,6 +10,7 @@ export const login = (user, callback) => {
         localStorage.setItem("Token", JSON.stringify(data[1]));
         localStorage.setItem("User", JSON.stringify(data[0]));
     })
+    .then(callback)
 }
 
 export const register = (user) => {
@@ -30,7 +31,7 @@ export const getContacts = (callback) => {
     .then(res => res.json())
     .then(callback)
 }
-export const createContact = (contact) => {
+export const createContact = (contact, callback) => {
     fetch(`http://localhost:5000/contacts`, {
         method: 'POST',
         headers: { 
@@ -40,6 +41,7 @@ export const createContact = (contact) => {
         body: JSON.stringify(contact)
     })
     .then(res => res.json())
+    .then(callback)
 }
 
 export const updateContact = (contact) => {
