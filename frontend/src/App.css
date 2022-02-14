@@ -38,3 +38,9 @@
   top: 50px;
   border: 1px solid black;
 }
+.small{
+  color: red;
+  display: flex;
+  justify-content: space-between;
+  margin: 10px
+}

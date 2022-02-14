@@ -6,15 +6,15 @@ class ContactList extends Component {
   render() {
     return (
         <div className='contacts'>
-            Your Contact List
+            <div className='small'>
+                <small>Name</small>
+                <small>Phone</small>
+                <small></small>
+            </div>
             {
                 this.props.contacts.map((contact, index) => {
                     return <div key={index}>
-                        <SingleContact 
-                            contact={contact}
-                            onDelete={this.props.onDelete}
-                            onEdit={this.props.onEdit}
-                            index={index} />
+                        <SingleContact contact={contact} onDelete={this.props.onDelete} index={index} />
                     </div>
                 })
             }

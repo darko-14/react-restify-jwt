@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css'
+import { Link as RouterLink } from 'react-router-dom'
 
 class SingleContact extends Component {
 
@@ -8,7 +9,7 @@ class SingleContact extends Component {
     }  
 
     handleOnEdit = () => {
-        this.props.onEdit(this.props.index)
+        this.props.changeEdit()
     }  
 
     render() {
@@ -17,8 +18,10 @@ class SingleContact extends Component {
                 <h3>{this.props.index+1}. {this.props.contact.name}</h3>
                 <h4>{this.props.contact.phone}</h4>
                 <div style={{marginTop: 17}}>
-                    <button className='btn' onClick={this.handleOnEdit}>Edit</button>
-                    <button className='btn' onClick={this.handleOnDelete}>Delete</button>
+                    <RouterLink to={{pathname: `/edit/${this.props.contact.contact_id}`, 
+                    state: this.props.contact
+                    }}>edit   </RouterLink>
+                    <button onClick={this.handleOnDelete}> Delete</button>
                 </div>
             </div>
         )

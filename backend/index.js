@@ -41,6 +41,7 @@ app.get('/contacts', jwtAuth, (req, res) => {
         if(error) console.log(error);
         res.send(rows);
         console.log(`Contacts for ${req.user} queried.`);
+        
     })
 })
 
@@ -52,8 +53,7 @@ app.post('/contacts', jwtAuth, (req, res) => {
             if(err) return res.send(err);
             res.send(`Contact inserted.`);
         })
-    })
-    
+    }) 
 })
 
 app.put('/contacts/:id', jwtAuth, (req, res) => {

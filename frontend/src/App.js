@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import Login from './components/Login';
 import Register from './components/Register';
 import HomePage from './components/HomePage';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import AddUser from './components/AddUser';
+import EditUser from './components/EditUser';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { login } from './service/api'
 
 export default class App extends Component {
@@ -29,18 +31,23 @@ export default class App extends Component {
     this.setState({user:''})
   }
 
+
   render() {
     return (
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={
+      <Router>
+        <Switch>
+          <Route exact path='/' > {
             this.state.user === '' ? <Login onLogin={this.onLogin}/> : <HomePage user={this.state.user}
                                                            logout={this.logout} />
-          }/> 
-          <Route path='/login' element={<Login />}/> 
-          <Route path='/register' element={<Register />}/> 
-        </Routes>
-      </BrowserRouter>
+          }</Route>
+          <Route exact path='/login' ><Login /></Route>
+          <Route exact path='/register' ><Register /></Route>
+          <Route exact path='/add' ><AddUser onAdd={this.onAdd}/></Route>
+          <Route exact path='/edit/:id' ><EditUser/></Route>
+
+
+        </Switch>
+        </Router>
     )
   }
 }

@@ -12,7 +12,7 @@ class ContactForm extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.onAddorEdit(this.state)
+        this.props.onContactChange(this.state)
         this.setState({name: '', phone: ''})
     }
 

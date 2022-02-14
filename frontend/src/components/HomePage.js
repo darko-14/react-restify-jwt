@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { getContacts } from '../service/api'
-import { createContact } from '../service/api'
-import { updateContact } from '../service/api'
 import { deleteContact } from '../service/api'
 import ContactList from './ContactList'
-import ContactForm from './ContactForm';
+import { Link } from 'react-router-dom'
 import '../App.css'
 
 class HomePage extends Component {
@@ -13,7 +11,6 @@ class HomePage extends Component {
         super()
         this.state = {
             contacts: [],
-            currentIndex: -1
         }
     }
 
@@ -25,18 +22,7 @@ class HomePage extends Component {
         getContacts(this.setTheState)
     }
     
-    onAddorEdit = (contact) => {
-        if(this.state.currentIndex === -1){
-            
-            createContact(contact);
-            this.setState({ contacts: [...this.state.contacts, contact] })
-        }else{
-            updateContact(this.state.contacts[this.state.currentIndex].contact_id);
-
-            this.setState({ currentIndex: -1 })
-        }
-    }
-
+    
     onEdit = (index) => {
         this.setState({ currentIndex: index })
     }
@@ -52,18 +38,16 @@ class HomePage extends Component {
             <div className='header'>
                 <div>Welcome <b> {this.props.user} </b> {this.state.currentIndex}</div>
                 <button onClick={this.props.logout}>log out</button>
+                <Link to='/add' >add new</Link>
             </div>
 
-            {this.state.currentIndex < 0 ? <ContactForm onAddorEdit={this.onAddorEdit}
-                /> : null}
-
-            {this.state.currentIndex > -1 ? <ContactForm onAddorEdit={this.onAddorEdit} 
-                contact={this.state.contacts[this.state.currentIndex]}/> : null }
+            {/* {this.state.currentIndex > -1 ? <ContactForm onContactChange={this.onContactChange} 
+                contact={this.state.contacts[this.state.currentIndex]}/> : null } */}
 
             {this.state.contacts.length > 0 ? <ContactList 
                                   contacts={this.state.contacts} 
                                   onDelete={this.onDelete}
-                                  onEdit={this.onEdit}
+                                  changeEdit={this.changeEdit}
                                   /> : 'No contacts'}
         </div>
     }

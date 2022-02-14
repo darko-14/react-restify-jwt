@@ -14,6 +14,7 @@ export const login = (user, callback) => {
 }
 
 export const register = (user) => {
+    console.log('user', user);
     fetch(`http://localhost:5000/register`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -41,10 +42,10 @@ export const createContact = (contact, callback) => {
         body: JSON.stringify(contact)
     })
     .then(res => res.json())
-    .then(callback)
+    .then(console.log)
 }
 
-export const updateContact = (contact) => {
+export const updateContact = (contact, callback) => {
     fetch(`http://localhost:5000/contacts/${contact.id}`, {
         method: 'PUT',
         headers: { 
@@ -54,6 +55,7 @@ export const updateContact = (contact) => {
         body: JSON.stringify(contact)
     })
     .then(res => res.json())
+    .then(callback)
 }
 
 export const deleteContact = (id) => {
